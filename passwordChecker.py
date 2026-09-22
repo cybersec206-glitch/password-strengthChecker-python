@@ -1,15 +1,23 @@
-password = input("enter your password: ")
-
-
+password=input("Enter your password: ")
+if password=="":
+    print("password cannot be empty")
+    exit()
+if len(password) > 64:
+    print("password is too long")
+    exit()
 score=0
 feedback =[]
+common_passwords=["12345678","password","abc123","00000000","87654321"]
+if password in common_passwords:
+    feedback.append("Avoid common passwords")
+    
 #check length
 def check_length(password):
     return len(password)>=8
         
-    
+
+
 if check_length(password):
-    print("good length")
     score += 1
 else:
     feedback.append("Use at least 8 characters")
@@ -20,7 +28,7 @@ def check_uppercase(password):
     return any(char.isupper() for char in password)
        
 if check_uppercase(password):
-    print("contains uppercase")
+   
     score += 1
 else:
     feedback.append("Add an uppercase letter")
@@ -32,18 +40,18 @@ def check_lowercase(password):
     return any(char.islower() for char in password)
       
 if check_lowercase(password):
-    print("contains lowercase")
+    
     score += 1
 else:
      feedback.append("Add a lowercase letter")
 
 
-#check for digest
+#check for digit
 def check_digit(password):
     return any(char.isdigit() for char in password)
      
 if check_digit(password):
-    print("contains digit")
+    
     score += 1
 else:
     feedback.append("Add a digit")
@@ -55,7 +63,7 @@ def check_special(password):
    return any(char in"!@#$%^&*" for char in password)
      
 if check_special(password):
-    print("contains special character")
+    
     score += 1
 else:
     feedback.append("Add a special character")
@@ -64,7 +72,7 @@ else:
 print("\n"+ "=" *30)
 print("PASSWORD SECURITY REPORT")
 print("="*30)
-
+print(f"Score: {score}/5")
 if score<=2:
     print("weak password")
 elif score <=4:
